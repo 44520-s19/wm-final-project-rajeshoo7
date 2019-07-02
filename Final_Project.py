@@ -107,46 +107,96 @@ for senti in sentis:
     s+=1
     print(get_sentiments(senti))
 
-
+'''
 
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
+import matplotlib.style as style
 
 #build our figure
+
+style.use('seaborn-poster')
 
 
 fig = plt.figure()
 
 # build axis
 
-ax=fig.add_subplot(111, projection='3d')
+ax=fig.add_subplot(111, projection='2d')
 
 from nltk_helpers import split_sentiments
 
 dataX, dataY, dataZ = split_sentiments([get_sentiments(tweet) for tweet in sentis])
 
-ax.scatter(dataX, dataY, dataZ, color='r',marker='d')
+#ax.scatter(dataX, dataY, dataZ, color='r',marker='d')
 
+ax.scatter(dataX,  dataZ, color='r',marker='d')
 
 
 
 
 ax.set_xlabel('Negative')
-ax.set_ylabel('Neutral')
+#ax.set_ylabel('Neutral')
 ax.set_zlabel('Positive')
 
 
+
+
+
+
+
+'''
+
+'''
+import matplotlib.style as style
+
+import matplotlib.pyplot as plt
+
+NUM_VALUES = 8
+
+heights=list(rating_avg)
+heights.sort(reverse=True)
+print(heights)
+style.use('seaborn-poster')
+plt.bar(range(1,9), heights[:NUM_VALUES],color='b')
+plt.title('GOT Season wise Rating')
+plt.ylabel(' Rating')
+plt.xlabel('Season Number')
+plt.show()
+
+plt.tight_layout()
+
+plt.savefig('Histogram_Plot.png',transparent=True)
 
 
 plt.show()
 
 
 
+'''
+import matplotlib.pyplot as plt
+import matplotlib.style as style
+
+#build our figure
+
+style.use('seaborn-poster')
+#fig = plt.figure()
+
+from nltk_helpers import split_sentiments
+
+dataX, dataY, dataZ = split_sentiments([get_sentiments(tweet) for tweet in sentis])
 
 
-    
-print('test',s)
+plt.scatter(dataX,dataZ,color='r',marker='*')
 
-print(count)
-    
-    
+plt.xlabel('Negative')
+plt.ylabel('Positive')
+
+plt.title('Positive vs Negative Sentiments For Season 8')
+
+#plt.legend(loc='upper right', shadow=True)
+
+plt.tight_layout()
+
+plt.savefig('Sentimental_2D_Plot.png', transparent=True)
+plt.show()
